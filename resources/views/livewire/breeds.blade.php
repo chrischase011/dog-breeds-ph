@@ -38,7 +38,7 @@ new class extends Component {
         document.addEventListener('livewire:init', () => {
             (async () => {
                 const breeds = await window.dog.fetchDogBreeds();
-                Livewire.dispatch('breedsFetched', { breeds }); // no object wrapper
+                Livewire.dispatch('breedsFetched', { breeds });
             })();
         });
     </script>
