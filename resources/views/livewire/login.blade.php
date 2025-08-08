@@ -29,13 +29,14 @@ new #[Layout('components.layouts.auth')] class extends Component {
                 $this->success('Login Successful', 'Welcome back to Dog Breed PH!');
                 $this->reset();
 
-                $userDogChoice = UserDogChoice::where('user_id', auth()->id())->first();
+                $userDogChoice = UserDogChoice::where('user_id', Auth::id())->first();
 
                 if(!$userDogChoice) {
                     redirect()->route('select.breeds');
                 }
-
-                redirect()->route('home');
+                else { 
+                    redirect()->route('home');
+                }
             } else {
                 $this->error('Login Failed', 'Invalid email or password.');
                 return;

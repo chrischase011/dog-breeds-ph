@@ -30,7 +30,7 @@ new class extends Component {
                 :image="$breed['image']"
             />
         @empty
-            <p class="col-span-full text-center">No breeds loaded.</p>
+            <p class="col-span-full text-center">Loading Data...</p>
         @endforelse
     </div>
 

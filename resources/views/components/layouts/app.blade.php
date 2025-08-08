@@ -12,11 +12,11 @@
     </x-nav>
 
     {{-- Desktop view --}}
-    <x-nav full-width class="hidden lg:block w-full mx-auto max-w-screen-2xl mb-3">
+    <x-nav full-width class="hidden lg:block w-full mx-auto max-w-screen-2xl shadow-lg mb-3">
         <x-slot:brand>
             <x-app-brand />
         </x-slot:brand>
-        <x-slot:actions class="justify-end w-full shadow-lg pb-5">
+        <x-slot:actions class="justify-end w-full pb-5">
             <x-button label="Home" icon="mdi.home" link="{{ route('home') }}" class="btn-ghost btn-sm" responsive />
             <x-button label="Breeds" icon="mdi.dog" link="{{ route('breeds.list') }}" class="btn-ghost btn-sm" responsive />
 
@@ -39,7 +39,7 @@
                     </x-slot:trigger>
                     <x-slot:content>
                         <x-menu class="p-0">
-                            <x-menu-item title="Profile" icon="mdi.account" link="#"/>
+                            <x-menu-item title="Profile" icon="mdi.account" link="{{ route('profile') }}"/>
                             <x-menu-item 
                                 title="Toggle Theme" 
                                 icon="o-swatch" 
@@ -63,7 +63,6 @@
 
     {{-- MAIN --}}
     <x-main with-nav>
-       
         {{-- The `$slot` goes here --}}
         <x-slot:content>
             {{ $slot }}

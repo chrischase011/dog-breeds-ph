@@ -18,7 +18,6 @@ new class extends Component {
             'userDogChoices' => $this->userDogChoices,
         ]);
     }
-
 }; ?>
 
 <div>
@@ -26,7 +25,8 @@ new class extends Component {
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
         @foreach ($users as $user)
-            <div class="flex items-center p-4 border border-gray-600 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200">
+            <div
+                class="flex items-center p-4 border border-gray-600 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200">
                 {{-- Avatar --}}
                 <x-avatar :image="asset('storage/' . $user->profile_picture)" class="!w-14 !h-14 shrink-0" />
 
@@ -38,11 +38,42 @@ new class extends Component {
                     </div>
 
                     {{-- Dog breeds --}}
-                    <div class="text-sm text-blue-600 mt-1">
-                        {{ $user->userDogChoices->pluck('dog_breed')->join(', ') ?: 'No breeds selected' }}
+                    <div class="text-sm text-blue-600 mt-1 flex flex-wrap gap-2">
+                        @forelse($user->userDogChoices as $choice)
+                            <x-popover>
+                                <x-slot:trigger>
+                                    <span class="underline cursor-pointer">
+                                        {{ $choice->dog_breed }}
+                                    </span>
+                                </x-slot:trigger>
+                                <x-slot:content>
+                                    <div x-data="{ img: null }" x-init="fetch(`https://dog.ceo/api/breed/{{ strtolower(str_replace(' ', '-', $choice->dog_breed)) }}/images`)
+                                        .then(res => res.json())
+                                        .then(data => img = data.message[0] || null)">
+                                        <template x-if="img">
+                                            <img x-bind:src="img" class="w-24 h-24 rounded" />
+                                        </template>
+                                        <template x-if="!img">
+                                            <span>No image found</span>
+                                        </template>
+                                    </div>
+                                </x-slot:content>
+                            </x-popover>
+                        @empty
+                            <span class="text-gray-500">No breeds selected</span>
+                        @endforelse
                     </div>
                 </div>
             </div>
         @endforeach
     </div>
+
+    <script>
+        document.addEventListener('livewire:init', () => {
+            async function getDogBreedImage(breed) {
+                const images = await window.dog.fetchDogBreedImages(breed);
+                return images[0] || null;
+            }
+        });
+    </script>
 </div>

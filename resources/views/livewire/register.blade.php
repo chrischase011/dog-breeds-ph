@@ -70,7 +70,8 @@ new #[Layout('components.layouts.auth')] class extends Component {
 
 <div class="flex flex-col items-center justify-center h-screen">
     <x-card title="Dog Breed PH Registration" subtitle="Join the Dog Lovers Community" class="w-full max-w-3xl border border-gray-400" shadow separator>
-        <form wire:submit.prevent="register" class="space-y-4">
+        <span class="text-gray-400 mb-6 text-sm">Please run <code>php artisan storage:link</code> to create a symbolic link for the storage folder.</span>
+        <x-form wire:submit.prevent="register" class="space-y-4 mt-5">
             <div class="flex justify-center">
                 <x-file wire:model="profilePicture" accept="image/png" crop-after-change change-text="Select Profile Picture" crop-title-text="Crop Profile Picture">
                     <img src="{{ $profilePicture ?? $emptyUserJpg }}" class="h-40 rounded-lg" />
@@ -92,7 +93,7 @@ new #[Layout('components.layouts.auth')] class extends Component {
                 <x-button type="submit" wire:target="profilePicture" wire:loading.attr="disabled" spinner="register" class="w-full btn-primary">Register</x-button>
                 <x-button link="{{ route('login') }}" class="w-full btn-ghost hover:underline">Login Here</x-button>
             </div>
-        </form>
+        </x-form>
     </x-card>
 </div>
 
