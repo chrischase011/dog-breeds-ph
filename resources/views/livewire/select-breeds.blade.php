@@ -68,15 +68,10 @@ new class extends Component {
 
             $this->success('Success', 'Breeds saved successfully!');
 
-            return redirect()->route('home'); // ❗ Use `return` here
+            return redirect()->route('home');
         } catch (\Exception $e) {
             DB::rollBack();
-
             $this->error('Error', 'An error occurred while saving your selection: '. $e->getMessage());
-
-            // Optionally log the error
-            // Log::error($e);
-
             return;
         }
     }
@@ -134,7 +129,7 @@ new class extends Component {
         document.addEventListener('livewire:init', () => {
             (async () => {
                 const breeds = await window.dog.fetchDogBreeds();
-                Livewire.dispatch('breedsFetched', { breeds }); // no object wrapper
+                Livewire.dispatch('breedsFetched', { breeds });
             })();
         });
     </script>

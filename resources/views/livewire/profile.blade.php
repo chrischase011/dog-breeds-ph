@@ -142,13 +142,4 @@ new class extends Component {
             </x-slot:actions>
         </x-form>
     </x-modal>
-
-    <script>
-        document.addEventListener('livewire:init', () => {
-            async function getDogBreedImage(breed) {
-                const images = await window.dog.fetchDogBreedImages(breed);
-                return images[0] || null;
-            }
-        });
-    </script>
 </div>

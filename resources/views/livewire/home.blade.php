@@ -27,10 +27,8 @@ new class extends Component {
         @foreach ($users as $user)
             <div
                 class="flex items-center p-4 border border-gray-600 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200">
-                {{-- Avatar --}}
                 <x-avatar :image="asset('storage/' . $user->profile_picture)" class="!w-14 !h-14 shrink-0" />
 
-                {{-- User info --}}
                 <div class="ml-4">
                     {{-- Name --}}
                     <div class="text-base font-semibold text-gray-900 dark:text-gray-100">
@@ -67,13 +65,4 @@ new class extends Component {
             </div>
         @endforeach
     </div>
-
-    <script>
-        document.addEventListener('livewire:init', () => {
-            async function getDogBreedImage(breed) {
-                const images = await window.dog.fetchDogBreedImages(breed);
-                return images[0] || null;
-            }
-        });
-    </script>
 </div>
