@@ -67,5 +67,6 @@ new #[Layout('components.layouts.auth')] class extends Component {
             <x-button type="submit" class="w-full btn-primary">Login</x-button>
             <x-button link="{{ route('register') }}" class="w-full btn-ghost hover:underline">Register Here</x-button>
         </div>
+     </form>
     </x-card>
 </div>
